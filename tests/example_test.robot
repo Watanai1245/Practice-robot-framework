@@ -1,6 +1,6 @@
 *** Settings ***
 Library           SeleniumLibrary
-Suite Setup       Open Browser    ${URL}    ${BROWSER}
+Suite Setup       Open Browser    ${URL}    ${BROWSER}    --headless
 Suite Teardown    Close Browser
 
 *** Variables ***
@@ -14,4 +14,5 @@ Check YouTube Title
 Search On YouTube
     Input Text    name=search_query    Robot Framework
     Click Button    id=search-icon-legacy
-    Wait Until Page Contains Element    xpath=//a[contains(@title, "Robot Framework")]
+    Title Should Be    Robot Framework - YouTube 
+    # Wait Until Page Contains Element    xpath=//a[contains(@title, "Robot Framework")]

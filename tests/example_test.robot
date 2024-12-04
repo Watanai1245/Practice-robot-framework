@@ -1,18 +1,18 @@
 *** Settings ***
-Library           SeleniumLibrary
-Suite Setup       Open Browser    ${URL}    ${BROWSER}    --headless
-Suite Teardown    Close Browser
+Library    SeleniumLibrary
+Resource    ../resources/keywords.robot
+Suite Setup    Open Browser And Navigate To URL    ${URL}    ${BROWSER}
+# Suite Teardown    Close Browser
 
 *** Variables ***
-${URL}            https://www.youtube.com
-${BROWSER}        Chrome
+${URL}      https://testautomationpractice.blogspot.com/
+${BROWSER}  Chrome
 
 *** Test Cases ***
-Check YouTube Title
-    Title Should Be    YouTube
+Validate URL With W3C
+    Input Text    id=doc    https://www.example.com
+    Click Element    xpath=(//input[@id='submit'])[1]
+    Wait Until Page Contains    Showing results for    timeout=20s
+    Page Should Contain    Document checking completed.
+    Run Keyword If Test Passed    Close Browser
 
-Search On YouTube
-    Input Text    name=search_query    Robot Framework
-    Click Button    id=search-icon-legacy
-    Title Should Be    Robot Framework - YouTube 
-    # Wait Until Page Contains Element    xpath=//a[contains(@title, "Robot Framework")]
